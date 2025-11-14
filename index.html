@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HopMap - Infinite Canvas for Your Mind</title>
+    <meta name="description" content="Draw, hop, and review ideas on an endless canvas. Free to start, premium unlocks.">
+    <!-- Swiper CSS via CDN for carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        /* Smooth scrolling for nav jumps */
+        html { scroll-behavior: smooth; }
+
+        /* CSS Vars for Themes (HopMap Light/Dark) */
+        :root {
+            /* Light Defaults */
+            --bg-canvas: #F1F8E9;
+            --bg-ui: #E8F5E9;
+            --text-ui: #004D40;
+            --grid-accent: #A5D6A7;
+            --primary: #4CAF50;
+            --secondary: #8BC34A;
+            --unselected: #D0E8D1;
+            --border: #C8E6C9;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-canvas: #00251A;
+                --bg-ui: #004D40;
+                --text-ui: #E0F2F1;
+                --grid-accent: #4CAF50;
+                --primary: #66BB6A;
+                --secondary: #33691E;
+                --unselected: #00695C;
+                --border: #00796B;
+            }
+        }
+
+        /* Reset & Mobile-First Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+            line-height: 1.6; 
+            color: var(--text-ui); 
+            background: var(--bg-canvas); 
+            overflow-x: hidden; 
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme swap */
+        }
+        .container { max-width: 100%; margin: 0 auto; padding: 0 1rem; }
+        @media (min-width: 768px) { 
+            .container { max-width: 1200px; padding: 0 2rem; } /* Centered content with ribbons */
+        }
+        
+        /* Persistent Top Nav: Slim, Sticky, Section Links */
+        .top-nav { 
+            position: fixed; top: 0; left: 0; right: 0; height: 50px; 
+            background: rgba(232, 245, 233, 0.95); /* Semi-transparent for light; adjust for dark */
+            backdrop-filter: blur(10px); 
+            display: flex; align-items: center; justify-content: space-between; 
+            padding: 0 1rem; z-index: 1000; border-bottom: 1px solid var(--border); 
+            color: var(--text-ui);
+        }
+        @media (prefers-color-scheme: dark) { .top-nav { background: rgba(0, 77, 64, 0.95); } }
+        .nav-logo { display: flex; align-items: center; font-size: 1.1rem; font-weight: bold; }
+        .nav-logo img { width: 32px; height: 32px; margin-right: 0.5rem; }
+        
+        /* Hamburger Menu for Mobile */
+        .hamburger { 
+            display: none; flex-direction: column; cursor: pointer; gap: 2px; padding: 4px; 
+        }
+        .hamburger span { 
+            display: block; width: 20px; height: 2px; background: var(--text-ui); transition: 0.3s; 
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+        
+        /* Nav Links: Horizontal on Desktop, Hidden on Mobile */
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { 
+            color: var(--text-ui); text-decoration: none; font-size: 0.9rem; 
+            transition: color 0.3s; padding: 0.25rem 0; border-bottom: 2px solid transparent; 
+        }
+        .nav-links a:hover, .nav-links a.active { 
+            color: var(--primary); border-bottom-color: var(--primary); 
+        }
+        
+        /* Mobile Menu: Dropdown on Mobile */
+        .mobile-menu { 
+            display: none; position: absolute; top: 50px; left: 0; right: 0; 
+            background: var(--bg-ui); border-top: 1px solid var(--border); 
+            flex-direction: column; padding: 0; z-index: 999; 
+        }
+        .mobile-menu a { 
+            display: block; padding: 1rem; text-align: center; 
+            border-bottom: 1px solid var(--border); 
+        }
+        .mobile-menu a:hover { background: color-mix(in srgb, var(--bg-ui) 90%, var(--primary)); }
+        
+        .download-btn { 
+            background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; 
+            border-radius: 20px; text-decoration: none; font-size: 0.9rem; 
+            transition: background 0.3s; 
+        }
+        .download-btn:hover { background: color-mix(in srgb, var(--primary) 80%, black); }
+        
+        /* Responsive: Mobile */
+        @media (max-width: 767px) { 
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .mobile-menu.active { display: flex; }
+            .top-nav { justify-content: space-between; } /* Ensure spacing */
+        }
+        @media (min-width: 768px) { 
+            .mobile-menu { display: none !important; } /* Force hide on desktop */
+        }
+        
+        /* Hero Section: Full height, subtle pattern for desktop interest */
+        .hero { 
+            height: 100vh; 
+            background: linear-gradient(135deg, var(--bg-ui), var(--grid-accent)); 
+            /* Subtle pond-like pattern */
+            background-image: 
+                radial-gradient(circle at 25% 25%, var(--grid-accent) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, var(--grid-accent) 1px, transparent 1px);
+            background-size: 100px 100px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            text-align: center; padding: 2rem 1rem; position: relative; 
+            margin-top: 50px; /* Offset for fixed nav */
+        }
+        .tagline { font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; color: var(--text-ui); } /* Mobile scale */
+        @media (min-width: 768px) { .tagline { font-size: 3.5rem; } }
+        .carousel-container { width: 100%; max-width: 400px; height: 250px; margin-top: 1rem; } /* Full width on mobile */
+        @media (min-width: 768px) { 
+            .carousel-container { max-width: 800px; height: 500px; } /* Bigger on desktop */
+        }
+        .swiper { height: 100%; width: 100%; } /* Ensure full container fill */
+        .swiper-slide { 
+            display: flex; justify-content: center; align-items: center; 
+            background: var(--bg-ui); border-radius: 10px; overflow: hidden; 
+        }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .swiper-pagination { 
+            bottom: 0.5rem !important; /* Adjust dots position if needed */
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+        }
+        .swiper-pagination-bullet { 
+            width: 8px; height: 8px; margin: 0 4px !important; /* Consistent sizing */
+        }
+        
+        /* Expandable Sections (Accordion) - Main */
+        .sections { padding: 2rem 0; } /* Reduced padding to minimize dead space */
+        @media (min-width: 768px) { .sections { padding: 3rem 0; } }
+        .section-anchor { scroll-margin-top: 70px; } /* Increased offset for better mobile reveal (covers nav + buffer) */
+        @media (min-width: 768px) { .section-anchor { scroll-margin-top: 50px; } } /* Original on desktop */
+        .accordion-item { 
+            margin: 1.5rem 0; /* More breathing room */
+            border: 1px solid var(--border); 
+            border-radius: 10px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle depth */
+            max-width: 100%; /* Ensure it doesn't exceed screen */
+        }
+        .accordion-header { 
+            background: var(--bg-ui); padding: 1rem; cursor: pointer; 
+            display: flex; justify-content: space-between; align-items: center; 
+            font-weight: bold; transition: background 0.3s; color: var(--text-ui);
+        }
+        .accordion-header:hover { background: color-mix(in srgb, var(--bg-ui) 90%, var(--primary)); }
+        .accordion-header::after { content: '+'; font-size: 1.5rem; color: var(--primary); transition: transform 0.3s; }
+        .accordion-header.active::after { transform: rotate(45deg); }
+        .accordion-content { 
+            max-height: 0; overflow: hidden; background: var(--bg-canvas); 
+            transition: max-height 0.3s ease; padding: 0 1rem; color: var(--text-ui); /* Symmetric padding */
+        }
+        .accordion-content.active { max-height: 2000px; padding: 1rem; }
+        .accordion-content p, .accordion-content ul, .accordion-content table, .accordion-content ol { margin-bottom: 1rem; }
+        .accordion-content h3 { color: var(--primary); margin: 1rem 0 0.5rem; }
+        table { width: 100%; border-collapse: collapse; background: var(--bg-ui); min-width: 300px; }
+        th, td { 
+            padding: 0.5rem; text-align: left; border-bottom: 1px solid var(--border); 
+            word-break: break-word; color: var(--text-ui); 
+            vertical-align: top; /* Align for better mobile reading */
+        }
+        @media (max-width: 480px) { 
+            th, td { padding: 0.4rem; font-size: 0.85rem; } /* Compact on small screens */
+        }
+        th { background: color-mix(in srgb, var(--bg-ui) 80%, var(--grid-accent)); }
+        ul { padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        ol { padding-left: 1.5rem; }
+        
+        /* All Tables: No-Wrap for Clean Look + Swipe (applied broadly) */
+        .permissions-table th, .permissions-table td, .features-table th, .features-table td { white-space: nowrap; } /* No wrap for headers/columns */
+        
+        /* Responsive Table Wrapper - Apply to all tables */
+        .table-wrapper { 
+            overflow-x: auto; margin-bottom: 1rem; -webkit-overflow-scrolling: touch; 
+            border-radius: 5px; /* Match accordion radius */
+            -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+            scrollbar-width: none; /* Hide scrollbar in Firefox */
+        }
+        .table-wrapper::-webkit-scrollbar { display: none; } /* Hide scrollbar in WebKit */
+        
+        /* Nested Sub-Accordions for Policy */
+        .sub-accordion-item { margin: 0.5rem 0; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
+        .sub-accordion-header { 
+            background: var(--unselected); padding: 0.75rem; cursor: pointer; 
+            display: flex; justify-content: space-between; align-items: center; 
+            font-weight: 600; font-size: 0.95rem; transition: background 0.3s; color: var(--text-ui);
+        }
+        .sub-accordion-header:hover { background: color-mix(in srgb, var(--unselected) 90%, var(--secondary)); }
+        .sub-accordion-header::after { content: '▼'; font-size: 0.8rem; color: var(--primary); transition: transform 0.3s; transform: rotate(180deg); }
+        .sub-accordion-header.active::after { transform: rotate(0deg); }
+        .sub-accordion-content { 
+            max-height: 0; overflow: hidden; background: var(--bg-canvas); 
+            transition: max-height 0.3s ease; padding: 0 0.75rem; color: var(--text-ui);
+        }
+        .sub-accordion-content.active { max-height: 1500px; padding: 0.75rem; }
+        .progress-badge { 
+            background: var(--primary); color: white; padding: 0.2rem 0.5rem; 
+            border-radius: 10px; font-size: 0.8rem; margin-left: 0.5rem; 
+        }
+        
+        /* CTA */
+        .cta { 
+            background: var(--primary); color: white; text-align: center; 
+            padding: 3rem 1rem; /* More vertical space */
+        }
+        .cta h2 { margin-bottom: 1rem; }
+        .play-store-btn { 
+            display: inline-block; background: var(--secondary); color: var(--text-ui); 
+            padding: 1rem 2rem; border-radius: 30px; text-decoration: none; 
+            font-weight: bold; margin: 0.5rem; transition: transform 0.3s; 
+        }
+        .play-store-btn:hover { transform: scale(1.05); }
+        
+        /* Footer */
+        .footer { 
+            background: var(--bg-ui); color: var(--text-ui); text-align: center; 
+            padding: 2rem 1rem; border-top: 1px solid var(--border); /* More padding */
+        }
+        .social-links { margin: 0.5rem 0; }
+        
+        /* Responsive */
+        @media (min-width: 768px) { 
+            .carousel-container { max-width: 800px; height: 500px; } 
+        }
+    </style>
+</head>
+<body>
+    <!-- Persistent Top Nav -->
+    <nav class="top-nav" id="topNav">
+        <div class="nav-logo">
+            <img src="assets/hopmaplauncher.png" alt="HopMap Logo"> HopMap
+        </div>
+        <ul class="nav-links">
+            <li><a href="#features" onclick="setActiveNav(this); scrollToSection('#features')">Features</a></li>
+            <li><a href="#how-it-works" onclick="setActiveNav(this); scrollToSection('#how-it-works')">How It Works</a></li>
+            <li><a href="#privacy" onclick="setActiveNav(this); scrollToSection('#privacy')">Privacy</a></li>
+            <li><a href="#faq" onclick="setActiveNav(this); scrollToSection('#faq')">FAQ</a></li>
+        </ul>
+        <a href="#cta" class="download-btn" onclick="scrollToSection('#cta')">Download Free</a>
+        
+        <!-- Hamburger -->
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#features" onclick="setActiveNav(this); scrollToSection('#features'); toggleMobileMenu()">Features</a>
+            <a href="#how-it-works" onclick="setActiveNav(this); scrollToSection('#how-it-works'); toggleMobileMenu()">How It Works</a>
+            <a href="#privacy" onclick="setActiveNav(this); scrollToSection('#privacy'); toggleMobileMenu()">Privacy</a>
+            <a href="#faq" onclick="setActiveNav(this); scrollToSection('#faq'); toggleMobileMenu()">FAQ</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1 class="tagline">Breathe knowledge to Life in your Pond</h1>
+        <div class="carousel-container">
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://via.placeholder.com/800x500/4a90e2/white?text=Draw+on+Infinite+Canvas" alt="Free drawing on infinite canvas" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="https://via.placeholder.com/800x500/a8e6cf/white?text=Frog+Warp+Highlight" alt="Frog warping to Lilypad" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="https://via.placeholder.com/800x500/dcedc1/white?text=Pond+Review+Bubble" alt="Overdue Pond alert" loading="lazy"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sections -->
+    <section class="sections container">
+        <div id="features" class="section-anchor">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Features</div>
+                <div class="accordion-content">
+                    <div class="table-wrapper">
+                        <table class="features-table">
+                            <thead><tr><th>Feature</th><th>Free</th><th>Premium</th><th>Why?</th></tr></thead>
+                            <tbody>
+                                <tr><td>Infinite Canvas</td><td>✓</td><td>✓</td><td>Endless space to draw & pan</td></tr>
+                                <tr><td>Frogs/Lilypads</td><td>✗</td><td>✓</td><td>Warp between ideas, folder cycles</td></tr>
+                                <tr><td>Ponds</td><td>✗</td><td>✓</td><td>Encapsulate for reviews & reminders</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="how-it-works" class="section-anchor">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">How It Works</div>
+                <div class="accordion-content">
+                    <ol>
+                        <li>Sketch your web of ideas on the infinite canvas.</li>
+                        <li>Drop Lilypads & link Frogs for quick warps (tap to jump & highlight).</li>
+                        <li>Draw Ponds to encapsulate—track contents in menus.</li>
+                        <li>Set user-chosen reminders (down to the minute) per Pond.</li>
+                        <li>Get tray notifications—tap to navigate right to the HopMap file containing the Pond for review!</li>
+                    </ol>
+                    <p>Precision over algorithms: No midnight pings—your schedule, your hops.</p>
+                </div>
+            </div>
+        </div>
+        <div id="privacy" class="section-anchor">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Privacy Policy</div>
+                <div class="accordion-content">
+                    <h3>HopMap Privacy Policy</h3>
+                    <p><strong>Effective Date:</strong> November 13, 2025</p>
+                    <p>HopMap ("the App," "we," "us," or "our") is a mindmapping and infinite canvas application developed by Sean H. (the "Developer"). We are committed to protecting your privacy and ensuring that your personal information is handled responsibly. This Privacy Policy explains how we handle any data in connection with the App, including what information is collected, how it is used, and your rights.</p>
+                    <p>By downloading, installing, or using the App, you agree to the terms of this Privacy Policy. If you do not agree, please do not use the App.</p>
+                    
+                    <!-- Nested Sub-Sections -->
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            1. Information We Collect <span class="progress-badge">1/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>HopMap is designed to operate entirely on your device without collecting, storing, or transmitting any personal or user data to us or third parties. All processing—such as creating, editing, saving, and reviewing HopMap files (e.g., .HopMap or .json formats)—happens locally in your device's memory or storage.</p>
+                            <ul>
+                                <li><strong>No Personal Data Collected:</strong> We do not collect, access, or store any personally identifiable information (PII), such as your name, email address, device ID, location, or usage analytics.</li>
+                                <li><strong>No App Activity Data:</strong> We do not track your interactions within the App, such as features used, session duration, or content created.</li>
+                                <li><strong>No Device or Performance Data:</strong> No crash reports, diagnostics, or telemetry are sent off-device.</li>
+                                <li><strong>Local Files Only:</strong> HopMap files you create are saved to your device's local storage. Any sharing (e.g., via copy/paste, export, or OS share sheet to services like Google Drive) is initiated and controlled by you, and we do not facilitate or monitor these actions.</li>
+                                <li><strong>Encryption Feature:</strong> Encrypted saving uses a user-provided password to secure file contents on-device via AES-CBC encryption with PBKDF2 key derivation. The password is used only during save/load (held briefly in memory and not persisted) and is not stored, transmitted, or accessible to us. We do not guarantee recoverability (e.g., lost passwords mean irrecoverable files) or security against advanced attacks—this is a convenience feature, not a professional encryption tool. For encrypted files, thumbnails and review previews use a static placeholder image (a frog on a lilypad) to avoid exposing content.</li>
+                            </ul>
+                            <p>In summary: No data leaves your device unless you explicitly choose to share it outside the App.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            2. Permissions and Device Access <span class="progress-badge">2/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>To provide core functionality, HopMap requests the following Android permissions. These are used solely for on-device operations and do not involve data transmission:</p>
+                            <div class="table-wrapper">
+                                <table class="permissions-table">
+                                    <thead><tr><th>Permission</th><th>Purpose</th><th>Scope</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>READ_EXTERNAL_STORAGE / WRITE_EXTERNAL_STORAGE</td><td>Read/write HopMap files to your device's storage.</td><td>Local file access only; no cloud sync.</td></tr>
+                                        <tr><td>SCHEDULE_EXACT_ALARM</td><td>Schedule local reminders/notifications (e.g., for canvas tasks).</td><td>On-device alarms; no server involvement.</td></tr>
+                                        <tr><td>POST_NOTIFICATIONS</td><td>Display local push notifications.</td><td>Device screen only.</td></tr>
+                                        <tr><td>RECEIVE_BOOT_COMPLETED</td><td>Restart local alarms after device reboot.</td><td>On-device persistence.</td></tr>
+                                        <tr><td>INTERNET</td><td>Declared for potential future compatibility (e.g., with Google Play services), but not used for any data transfer in the current version.</td><td>No active network calls.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>We request these permissions at runtime where required and explain their use. You can revoke them via your device settings at any time, though this may limit App functionality.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            3. Third-Party Services <span class="progress-badge">3/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>HopMap integrates minimal third-party services, all focused on local or anonymized operations:</p>
+                            <ul>
+                                <li><strong>Google Play Billing:</strong> For freemium features (e.g., subscriptions to unlock advanced modes). All payment processing, including purchase data and billing info, is handled entirely by Google. We receive no payment details, user identifiers, or transaction history—only a status flag (e.g., "subscribed") to enable features. See Google's Privacy Policy for details.</li>
+                                <li><strong>Flutter Plugins:</strong> We use open-source libraries (e.g., file_picker, share_plus, flutter_local_notifications) for local file handling and notifications. These do not collect or share data off-device. Full list available in our pubspec.yaml (if hosted).</li>
+                            </ul>
+                            <p>No advertising SDKs, analytics tools (e.g., Firebase Analytics), or trackers are included.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            4. How We Use and Share Data <span class="progress-badge">4/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>Since we collect no data:</p>
+                            <ul>
+                                <li><strong>Use:</strong> All "data" (e.g., your canvas content) is processed ephemerally on-device for App features only, including local encryption/decryption during save/load.</li>
+                                <li><strong>Sharing:</strong> We do not share, sell, or disclose any information about you. User-initiated shares (e.g., exporting files) are your responsibility and not mediated by us.</li>
+                            </ul>
+                            <p>In the event of a device backup (e.g., via Google Drive), that's controlled by your OS/account settings—not the App.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            5. Children's Privacy <span class="progress-badge">5/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>HopMap is not intended for children under 13 (or the applicable age in your jurisdiction). We do not knowingly collect data from children. If you believe a child has provided information, contact us immediately.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            6. Data Security <span class="progress-badge">6/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>All local operations use standard Android security (e.g., scoped storage for files). Encryption is implemented on-device but is not audited or warrantied for compliance (e.g., GDPR/HIPAA). We do not store data, so there's no central breach risk. Keep your device secure and use strong locks for sensitive HopMap files. Remember: Lost passwords cannot be recovered by us.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            7. Your Rights <span class="progress-badge">7/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>Depending on your location (e.g., GDPR in EU, CCPA in California), you may have rights to access, correct, delete, or object to data processing. Since we collect none, these are N/A—but contact us for clarification. For Google-handled billing data, exercise rights via your Google Account.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            8. Changes to This Policy <span class="progress-badge">8/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>We may update this policy to reflect App changes. Significant updates will be notified in-app or via Play Store. Continued use after changes implies acceptance. Check back periodically.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-accordion-item">
+                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+                            9. Contact Us <span class="progress-badge">9/9</span>
+                        </div>
+                        <div class="sub-accordion-content">
+                            <p>For questions, concerns, or to exercise rights: Email hopmapdev@proton.me. We're a solo dev project, so responses may take a few days.</p>
+                            <p>Thank you for using HopMap—we're building it to empower your ideas, not track them!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="faq" class="section-anchor">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">FAQ</div>
+                <div class="accordion-content">
+                    <p><strong>Reminders user-set?</strong> Yes—for exact timing. Algorithm may be an option in the future.</p>
+                    <p><strong>Overdue? </strong> Check Home > Overdue, or Edit Menu > Pond Editor (bubbles highlight reds/oranges).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="cta section-anchor">
+        <div class="container">
+            <h2>Get HopMap Free on Google Play</h2>
+            <p>Unlock Premiums Inside: Warps, Reminders, & More</p>
+            <a href="https://play.google.com/store/apps/details?id=com.yourapp.hopmap" class="play-store-btn" target="_blank">Download on Google Play</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Sean Hopersberger. All rights reserved. HopMap: Made with ❤️ for all learners.</p>
+            <div class="social-links">
+                <!-- Uncomment when ready: <a href="https://x.com/yourhandle" target="_blank">@yourhandle on X</a> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Swiper JS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Theme Detection & Swap
+        function updateTheme() {
+            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        }
+        updateTheme(); // Initial
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme); // Listener
+
+        // Carousel Setup: Autoplay, pause on hover/touch
+        const swiper = new Swiper('.hero-swiper', {
+            loop: true,
+            autoplay: { delay: 3000, disableOnInteraction: false },
+            pagination: { 
+                el: '.swiper-pagination', 
+                clickable: true,
+                dynamicBullets: true, /* Helps with consistency on small screens */
+                dynamicMainBullets: 3
+            },
+            on: {
+                touchStart: function () { this.autoplay.stop(); },
+                touchEnd: function () { setTimeout(() => this.autoplay.start(), 3000); },
+                mouseEnter: function () { this.autoplay.stop(); },
+                mouseLeave: function () { setTimeout(() => this.autoplay.start(), 3000); }
+            }
+        });
+
+        // Main Accordion Toggle
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+            document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
+            document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('active'));
+            if (!isActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        // Nested Sub-Accordion Toggle
+        function toggleSubAccordion(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+            header.classList.toggle('active');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Custom scroll function for precise offset
+        function scrollToSection(selector) {
+            const element = document.querySelector(selector);
+            if (element) {
+                const navHeight = 50;
+                const offset = window.innerWidth <= 480 ? 70 : 50; // Mobile buffer
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: elementPosition - offset,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Nav Active State on Scroll
+        function setActiveNav(link) {
+            document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => a.classList.remove('active'));
+            link.classList.add('active');
+        }
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section-anchor');
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // Handle hash changes for direct links (e.g., from browser)
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                scrollToSection(hash);
+            }
+        });
+
+        // Close mobile menu on window resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 767) {
+                document.getElementById('mobileMenu').classList.remove('active');
+                document.querySelector('.hamburger').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
