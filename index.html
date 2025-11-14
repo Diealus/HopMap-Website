@@ -526,7 +526,7 @@
 <section id="cta" class="cta section-anchor">
     <div class="container">
         <h2>HopMap - Coming Soon to Google Play!</h2>
-        <p>Unlock Premiums Inside: Warps, Reminders, & More. Get notified when it's live.</p>
+        <p>Unlock Premiums Inside: Warps, Reminders, & More. Coming soon!</p>
         <button class="play-store-btn" onclick="openComingSoonModal()">Notify Me</button>
     </div>
 </section>
@@ -668,11 +668,6 @@ document.addEventListener('keydown', function(event) {
         closeComingSoonModal();
     }
 });
-// Optional: Form submission feedback (test alert—remove once Formspree is set up)
-document.getElementById('waitlistForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Stop form for now
-    alert('Thanks! You\'ll hear from us soon. (Test—set up Formspree next.)');
-});
         
     </script>
 
@@ -681,13 +676,8 @@ document.getElementById('waitlistForm').addEventListener('submit', function(e) {
     <div class="modal-content">
         <span class="close" onclick="closeComingSoonModal()">&times;</span>
         <h3>🐸 HopMap is Hopping Your Way!</h3>
-        <p>Our infinite canvas app is in final polish. We'll ping you the second it's on Google Play.</p>
-        <!-- Optional Email Form (get your Formspree endpoint at formspree.io if you want signups) -->
-        <form id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="margin: 1rem 0;">
-            <input type="email" name="email" placeholder="your.email@example.com" required style="width: 70%; padding: 0.5rem; margin-right: 0.5rem; border: 1px solid var(--border); border-radius: 5px; background: var(--bg-canvas); color: var(--text-ui);">
-            <button type="submit" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">Join Waitlist</button>
-        </form>
-        <p style="font-size: 0.8em; margin-top: 1rem;">No spam—promise. Just launch news.</p>
+        <p>Our infinite canvas app is in final polish. We'll see you on Google Play very soon.</p>
+        <p style="font-size: 0.8em; margin-top: 1rem;">Stay tuned—your pond awaits!</p>
     </div>
 </div>
     
