@@ -247,6 +247,64 @@
         @media (min-width: 768px) { 
             .carousel-container { max-width: 800px; height: 500px; } 
         }
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background: var(--bg-ui);
+    color: var(--text-ui);
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    position: relative;
+}
+.close {
+    color: var(--text-ui);
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover { color: var(--primary); }
+#waitlistForm input {
+    width: 70%;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--bg-canvas);
+    color: var(--text-ui);
+}
+#waitlistForm button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+#waitlistForm button:hover { background: var(--secondary); }
+@media (max-width: 480px) {
+    .modal-content { width: 95%; margin: 20% auto; padding: 1.5rem; }
+    #waitlistForm input { width: 60%; }
+}
+        
     </style>
 </head>
 <body>
@@ -464,14 +522,14 @@
         </div>
     </section>
 
-    <!-- CTA -->
-    <section id="cta" class="cta section-anchor">
-        <div class="container">
-            <h2>Get HopMap Free on Google Play</h2>
-            <p>Unlock Premiums Inside: Warps, Reminders, & More</p>
-            <a href="https://play.google.com/store/apps/details?id=com.yourapp.hopmap" class="play-store-btn" target="_blank">Download on Google Play</a>
-        </div>
-    </section>
+<!-- CTA -->
+<section id="cta" class="cta section-anchor">
+    <div class="container">
+        <h2>HopMap - Coming Soon to Google Play!</h2>
+        <p>Unlock Premiums Inside: Warps, Reminders, & More. Get notified when it's live.</p>
+        <button class="play-store-btn" onclick="openComingSoonModal()">Notify Me</button>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -590,6 +648,48 @@
                 document.querySelector('.hamburger').classList.remove('active');
             }
         });
+
+// Coming Soon Modal
+function openComingSoonModal() {
+    document.getElementById('comingSoonModal').style.display = 'block';
+}
+function closeComingSoonModal() {
+    document.getElementById('comingSoonModal').style.display = 'none';
+}
+// Close on outside click or ESC
+window.onclick = function(event) {
+    const modal = document.getElementById('comingSoonModal');
+    if (event.target === modal) {
+        closeComingSoonModal();
+    }
+};
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeComingSoonModal();
+    }
+});
+// Optional: Form submission feedback (test alert—remove once Formspree is set up)
+document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop form for now
+    alert('Thanks! You\'ll hear from us soon. (Test—set up Formspree next.)');
+});
+        
     </script>
+
+<!-- Coming Soon Modal -->
+<div id="comingSoonModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeComingSoonModal()">&times;</span>
+        <h3>🐸 HopMap is Hopping Your Way!</h3>
+        <p>Our infinite canvas app is in final polish. We'll ping you the second it's on Google Play.</p>
+        <!-- Optional Email Form (get your Formspree endpoint at formspree.io if you want signups) -->
+        <form id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="margin: 1rem 0;">
+            <input type="email" name="email" placeholder="your.email@example.com" required style="width: 70%; padding: 0.5rem; margin-right: 0.5rem; border: 1px solid var(--border); border-radius: 5px; background: var(--bg-canvas); color: var(--text-ui);">
+            <button type="submit" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer;">Join Waitlist</button>
+        </form>
+        <p style="font-size: 0.8em; margin-top: 1rem;">No spam—promise. Just launch news.</p>
+    </div>
+</div>
+    
 </body>
 </html>
