@@ -86,16 +86,26 @@
         }
         
         /* Mobile Menu: Dropdown on Mobile */
-        .mobile-menu { 
-            display: none; position: absolute; top: 50px; left: 0; right: 0; 
-            background: var(--bg-ui); border-top: 1px solid var(--border); 
-            flex-direction: column; padding: 0; z-index: 999; 
-        }
-        .mobile-menu a { 
-            display: block; padding: 1rem; text-align: center; 
-            border-bottom: 1px solid var(--border); 
-        }
-        .mobile-menu a:hover { background: color-mix(in srgb, var(--bg-ui) 90%, var(--primary)); }
+.mobile-menu {
+    display: none; position: absolute; top: 50px; left: 0; right: 0;
+    background: var(--bg-ui); border-top: 1px solid var(--border);
+    flex-direction: column; padding: 0; z-index: 999;
+}
+.mobile-menu a {
+    display: block; padding: 1rem; text-align: center;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-ui); /* Matches site theme text */
+    text-decoration: none; /* No underlines */
+}
+.mobile-menu a:hover {
+    background: color-mix(in srgb, var(--bg-ui) 90%, var(--primary)); /* Subtle green tint */
+    color: var(--text-ui); /* Keep text consistent on hover */
+}
+.mobile-menu a.active {
+    color: var(--primary); /* Green accent for selected */
+    background: color-mix(in srgb, var(--bg-ui) 95%, var(--primary)); /* Very subtle green bg for active */
+    border-left: 4px solid var(--primary); /* Optional: Left accent bar for mobile "selection" */
+}
         
         .download-btn { 
             background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; 
