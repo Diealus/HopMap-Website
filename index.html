@@ -349,7 +349,7 @@
 
     <!-- Hero -->
     <section class="hero">
-        <h1 class="tagline">Breathe knowledge to Life in your Pond</h1>
+        <h1 class="tagline">Grow knowledge in living Ponds</h1>
         <div class="carousel-container">
             <div class="swiper hero-swiper">
                 <div class="swiper-wrapper">
@@ -401,14 +401,14 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">Privacy Policy</div>
                 <div class="accordion-content">
                     <h3>HopMap Privacy Policy</h3>
-                    <p><strong>Effective Date:</strong> November 13, 2025</p>
+                    <p><strong>Effective Date:</strong> November 19, 2025</p>
                     <p>HopMap ("the App," "we," "us," or "our") is a mindmapping and infinite canvas application developed by Sean H. (the "Developer"). We are committed to protecting your privacy and ensuring that your personal information is handled responsibly. This Privacy Policy explains how we handle any data in connection with the App, including what information is collected, how it is used, and your rights.</p>
                     <p>By downloading, installing, or using the App, you agree to the terms of this Privacy Policy. If you do not agree, please do not use the App.</p>
                     
                     <!-- Nested Sub-Sections -->
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            1. Information We Collect <span class="progress-badge">1/9</span>
+                            1. Information We Collect <span class="progress-badge">1/10</span>
                         </div>
                         <div class="sub-accordion-content">
                             <p>HopMap is designed to operate entirely on your device without collecting, storing, or transmitting any personal or user data to us or third parties. All processing—such as creating, editing, saving, and reviewing HopMap files (e.g., .HopMap or .json formats)—happens locally in your device's memory or storage.</p>
@@ -419,13 +419,13 @@
                                 <li><strong>Local Files Only:</strong> HopMap files you create are saved to your device's local storage. Any sharing (e.g., via copy/paste, export, or OS share sheet to services like Google Drive) is initiated and controlled by you, and we do not facilitate or monitor these actions.</li>
                                 <li><strong>Encryption Feature:</strong> Encrypted saving uses a user-provided password to secure file contents on-device via AES-CBC encryption with PBKDF2 key derivation. The password is used only during save/load (held briefly in memory and not persisted) and is not stored, transmitted, or accessible to us. We do not guarantee recoverability (e.g., lost passwords mean irrecoverable files) or security against advanced attacks—this is a convenience feature, not a professional encryption tool. For encrypted files, thumbnails and review previews use a static placeholder image (a frog on a lilypad) to avoid exposing content.</li>
                             </ul>
-                            <p>In summary: No data leaves your device unless you explicitly choose to share it outside the App.</p>
+                            <p>In summary: No data of any kind is sent to the developer or any third party except for standard Google Play Billing requests (handled securely and privately by Google) when checking subscription status or processing a purchase.</p>
                         </div>
                     </div>
                     
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            2. Permissions and Device Access <span class="progress-badge">2/9</span>
+                            2. Permissions and Device Access <span class="progress-badge">2/10</span>
                         </div>
                         <div class="sub-accordion-content">
                             <p>To provide core functionality, HopMap requests the following Android permissions. These are used solely for on-device operations and do not involve data transmission:</p>
@@ -437,7 +437,7 @@
                                         <tr><td>SCHEDULE_EXACT_ALARM</td><td>Schedule local reminders/notifications (e.g., for canvas tasks).</td><td>On-device alarms; no server involvement.</td></tr>
                                         <tr><td>POST_NOTIFICATIONS</td><td>Display local push notifications.</td><td>Device screen only.</td></tr>
                                         <tr><td>RECEIVE_BOOT_COMPLETED</td><td>Restart local alarms after device reboot.</td><td>On-device persistence.</td></tr>
-                                        <tr><td>INTERNET</td><td>Declared for potential future compatibility (e.g., with Google Play services), but not used for any data transfer in the current version.</td><td>No active network calls.</td></tr>
+                                        <tr><td>INTERNET</td><td>Required for Google Play In-app Billing to check subscription status and process purchases. All billing communication is directly and exclusively with Google Play servers.</td><td>No other network activity occurs.</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -447,12 +447,12 @@
                     
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            3. Third-Party Services <span class="progress-badge">3/9</span>
+                            3. Third-Party Services <span class="progress-badge">3/10</span>
                         </div>
                         <div class="sub-accordion-content">
                             <p>HopMap integrates minimal third-party services, all focused on local or anonymized operations:</p>
                             <ul>
-                                <li><strong>Google Play Billing:</strong> For freemium features (e.g., subscriptions to unlock advanced modes). All payment processing, including purchase data and billing info, is handled entirely by Google. We receive no payment details, user identifiers, or transaction history—only a status flag (e.g., "subscribed") to enable features. See Google's Privacy Policy for details.</li>
+                                <li><strong>Google Play Billing:</strong> For freemium features (e.g., subscriptions to unlock advanced modes). All payment processing, including purchase data and billing info, is handled entirely by Google. We receive no payment details, user identifiers, or transaction history — only an anonymized entitlement token confirming whether premium features should be unlocked (no payment details, no email, no name, nothing else). See Google's Privacy Policy for details.</li>
                                 <li><strong>Flutter Plugins:</strong> We use open-source libraries (e.g., file_picker, share_plus, flutter_local_notifications) for local file handling and notifications. These do not collect or share data off-device. Full list available in our pubspec.yaml (if hosted).</li>
                             </ul>
                             <p>No advertising SDKs, analytics tools (e.g., Firebase Analytics), or trackers are included.</p>
@@ -461,7 +461,7 @@
                     
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            4. How We Use and Share Data <span class="progress-badge">4/9</span>
+                            4. How We Use and Share Data <span class="progress-badge">4/10</span>
                         </div>
                         <div class="sub-accordion-content">
                             <p>Since we collect no data:</p>
@@ -473,18 +473,34 @@
                         </div>
                     </div>
                     
+<div class="sub-accordion-item">
+    <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+        5. Children's Privacy <span class="progress-badge">5/10</span>
+    </div>
+    <div class="sub-accordion-content">
+        <p>HopMap is designed for users of all ages, including children aged 6 and above.</p>
+        <p>We do <strong>not</strong> collect, use, store, or share any personal information from any user — including children. No accounts, no analytics, no identifiers, no crash logs, nothing leaves the device except when the user explicitly shares a file themselves.</p>
+        <p>Because no personal information is ever collected or transmitted, HopMap fully complies with the Children’s Online Privacy Protection Act (COPPA), GDPR-K (EU/UK), and all similar children’s privacy laws worldwide. Parental consent is not required.</p>
+    </div>
+</div>
                     <div class="sub-accordion-item">
-                        <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            5. Children's Privacy <span class="progress-badge">5/9</span>
-                        </div>
-                        <div class="sub-accordion-content">
-                            <p>HopMap is not intended for children under 13 (or the applicable age in your jurisdiction). We do not knowingly collect data from children. If you believe a child has provided information, contact us immediately.</p>
-                        </div>
-                    </div>
+    <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
+        6. Google Play Families Program & Data Safety <span class="progress-badge">6/10</span>
+    </div>
+    <div class="sub-accordion-content">
+        <p>HopMap has been designed from the ground up to fully comply with Google Play Families Program policies and is intended to participate in the program.</p>
+        <p>In the Google Play Data safety section the app is declared as:</p>
+        <ul>
+            <li><strong>No data collected</strong></li>
+            <li><strong>No data shared</strong></li>
+        </ul>
+        <p>This declaration is accurate and complete.</p>
+    </div>
+</div>
                     
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            6. Data Security <span class="progress-badge">6/9</span>
+                            7. Data Security <span class="progress-badge">7/10</span>
                         </div>
                         <div class="sub-accordion-content">
                             <p>All local operations use standard Android security (e.g., scoped storage for files). Encryption is implemented on-device but is not audited or warrantied for compliance (e.g., GDPR/HIPAA). We do not store data, so there's no central breach risk. Keep your device secure and use strong locks for sensitive HopMap files. Remember: Lost passwords cannot be recovered by us.</p>
@@ -493,7 +509,7 @@
                     
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            7. Your Rights <span class="progress-badge">7/9</span>
+                            8. Your Rights <span class="progress-badge">8/10</span>
                         </div>
                         <div class="sub-accordion-content">
                             <p>Depending on your location (e.g., GDPR in EU, CCPA in California), you may have rights to access, correct, delete, or object to data processing. Since we collect none, these are N/A—but contact us for clarification. For Google-handled billing data, exercise rights via your Google Account.</p>
@@ -502,7 +518,7 @@
                     
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            8. Changes to This Policy <span class="progress-badge">8/9</span>
+                            9. Changes to This Policy <span class="progress-badge">9/10</span>
                         </div>
                         <div class="sub-accordion-content">
                             <p>We may update this policy to reflect App changes. Significant updates will be notified in-app or via Play Store. Continued use after changes implies acceptance. Check back periodically.</p>
@@ -511,7 +527,7 @@
                     
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            9. Contact Us <span class="progress-badge">9/9</span>
+                            10. Contact Us <span class="progress-badge">10/10</span>
                         </div>
                         <div class="sub-accordion-content">
                             <p>For questions, concerns, or to exercise rights: Email hopmapdev@proton.me. We're a solo dev project, so responses may take a few days.</p>
