@@ -618,34 +618,39 @@
         });
 
         // Custom Modal Functions
-        let modal = document.getElementById('imageModal');
-        let modalImg = document.getElementById('modalImage');
-        let captionText = document.getElementById('modalCaption');
+        document.addEventListener('DOMContentLoaded', function() {
+            let modal = document.getElementById('imageModal');
+            let modalImg = document.getElementById('modalImage');
+            let captionText = document.getElementById('modalCaption');
 
-        function openModal(src, alt) {
-            modal.style.display = 'block';
-            modalImg.src = src;
-            captionText.innerHTML = alt;
-            document.body.style.overflow = 'hidden';  // Lock scroll
-            console.log('Modal opened: ' + src);  // Debug
-        }
-
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';  // Unlock scroll
-            console.log('Modal closed');  // Debug
-        }
-
-        // Close on outside click or ESC
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
+            window.openModal = function(src, alt) {  // Make global for onclick
+                if (!modal) return;  // Safety check
+                modal.style.display = 'block';
+                modalImg.src = src;
+                captionText.innerHTML = alt;
+                document.body.style.overflow = 'hidden';  // Lock scroll
+                console.log('Modal opened: ' + src);  // Debug
             }
-        }
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
+
+            window.closeModal = function() {  // Global for onclick
+                if (modal) modal.style.display = 'none';
+                document.body.style.overflow = '';  // Unlock scroll
+                console.log('Modal closed');  // Debug
             }
+
+            // Close on outside click or ESC
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    closeModal();
+                }
+            }
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeModal();
+                }
+            });
+
+            console.log('Modal JS ready');  // Confirm load
         });
 
         // Main Accordion Toggle
