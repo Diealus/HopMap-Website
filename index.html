@@ -627,7 +627,12 @@
             zoomable: true,
             draggable: true,
             width: '90%',
-            height: '90%'
+            height: '90%',
+            openEffect: 'none',  // Instant open—no animation delay
+            closeEffect: 'none', // Instant close
+            closable: true,      // Ensures X button always shows
+            dragAutoSnap: false, // Smoother drag on mobile/desktop
+            download: false      // No download button (keeps it clean; optional)
         });
 
         // Main Accordion Toggle
