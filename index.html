@@ -620,7 +620,17 @@
         });
 
         // GLightbox Init: Full-view on image click/tap (modal only, no tabs)
-        document.addEventListener('DOMContentLoaded', function() {  // Wait for DOM ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Block default link behavior on all .glightbox elements
+            document.querySelectorAll('.glightbox').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();  // Stop any navigation
+                });
+                link.addEventListener('touchstart', function(e) {
+                    e.preventDefault();  // Mobile tap fix
+                });
+            });
+
             const lightbox = GLightbox({
                 selector: '.glightbox',
                 touchNavigation: true,
@@ -632,15 +642,19 @@
                 openEffect: 'none',  // Instant open
                 closeEffect: 'none', // Instant close
                 closable: true,      // X button always visible
-                dragAutoSnap: false, // Smooth mobile drag
-                download: false,     // No download icon
-                onOpen: function() { // Custom: Block any default nav
-                    document.body.style.overflow = 'hidden';  // Prevent scroll under modal
+                tapToClose: true,    // Close on tap outside (mobile-friendly)
+                dragAutoSnap: false, // Smooth drag
+                download: false,     // No download
+                onOpen: function() {
+                    document.body.style.overflow = 'hidden';  // Lock scroll under modal
+                    console.log('GLightbox opened');  // Debug: Check console
                 },
                 onClose: function() {
                     document.body.style.overflow = '';  // Restore scroll
+                    console.log('GLightbox closed');   // Debug
                 }
             });
+            console.log('GLightbox ready');  // Confirm init
         });
 
         // Main Accordion Toggle
