@@ -353,9 +353,10 @@
         <div class="carousel-container">
             <div class="swiper hero-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="https://via.placeholder.com/800x500/4a90e2/white?text=Draw+on+Infinite+Canvas" alt="Free drawing on infinite canvas" loading="lazy"></div>
-                    <div class="swiper-slide"><img src="https://via.placeholder.com/800x500/a8e6cf/white?text=Frog+Warp+Highlight" alt="Frog warping to Lilypad" loading="lazy"></div>
-                    <div class="swiper-slide"><img src="https://via.placeholder.com/800x500/dcedc1/white?text=Pond+Review+Bubble" alt="Overdue Pond alert" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="assets/screenshots/emotions-screenshot.png" alt="Ekman's 6 Emotions mindmap" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="assets/screenshots/grace-redemption.png" alt="Grace and Redemption theology map" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="assets/screenshots/character-sheet.png" alt="D&D character and class overview" loading="lazy"></div>            
+                    <div class="swiper-slide"><img src="assets/screenshots/dnd-stats.png" alt="D&D character stats sheet" loading="lazy"></div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -401,7 +402,7 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">Privacy Policy</div>
                 <div class="accordion-content">
                     <h3>HopMap Privacy Policy</h3>
-                    <p><strong>Effective Date:</strong> November 19, 2025</p>
+                    <p><strong>Effective Date:</strong> November 29, 2025</p>
                     <p>HopMap ("the App," "we," "us," or "our") is a mindmapping and infinite canvas application developed by Sean H. (the "Developer"). We are committed to protecting your privacy and ensuring that your personal information is handled responsibly. This Privacy Policy explains how we handle any data in connection with the App, including what information is collected, how it is used, and your rights.</p>
                     <p>By downloading, installing, or using the App, you agree to the terms of this Privacy Policy. If you do not agree, please do not use the App.</p>
                     
@@ -420,6 +421,7 @@
                                 <li><strong>Encryption Feature:</strong> Encrypted saving uses a user-provided password to secure file contents on-device via AES-CBC encryption with PBKDF2 key derivation. The password is used only during save/load (held briefly in memory and not persisted) and is not stored, transmitted, or accessible to us. We do not guarantee recoverability (e.g., lost passwords mean irrecoverable files) or security against advanced attacks—this is a convenience feature, not a professional encryption tool. For encrypted files, thumbnails and review previews use a static placeholder image (a frog on a lilypad) to avoid exposing content.</li>
                             </ul>
                             <p>In summary: No data of any kind is sent to the developer or any third party except for standard Google Play Billing requests (handled securely and privately by Google) when checking subscription status or processing a purchase.</p>
+                            <p><strong>Billing Data:</strong> Google may collect standard billing info (e.g., payment method, transaction history) per their <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a>. We access none of it—your subscription is processed end-to-end by Google.</p>
                         </div>
                     </div>
                     
@@ -452,7 +454,7 @@
                         <div class="sub-accordion-content">
                             <p>HopMap integrates minimal third-party services, all focused on local or anonymized operations:</p>
                             <ul>
-                                <li><strong>Google Play Billing:</strong> For freemium features (e.g., subscriptions to unlock advanced modes). All payment processing, including purchase data and billing info, is handled entirely by Google. We receive no payment details, user identifiers, or transaction history — only an anonymized entitlement token confirming whether premium features should be unlocked (no payment details, no email, no name, nothing else). See Google's Privacy Policy for details.</li>
+                                <li><strong>Google Play Billing:</strong> For freemium features (e.g., subscriptions to unlock advanced modes). All payment processing, including purchase data and billing info, is handled entirely by Google. We receive no payment details, user identifiers, or transaction history—only an anonymized entitlement token confirming whether premium features should be unlocked (no payment details, no email, no name, nothing else). To support seamless offline use, HopMap caches this token locally after initial verification, granting access until the end of your paid billing period. For accuracy (e.g., cancellations or refunds), the app performs light verification checks on launch or resume when online—connect periodically to ensure continued access. See Google's Privacy Policy for details.</li>
                                 <li><strong>Flutter Plugins:</strong> We use open-source libraries (e.g., file_picker, share_plus, flutter_local_notifications) for local file handling and notifications. These do not collect or share data off-device. Full list available in our pubspec.yaml (if hosted).</li>
                             </ul>
                             <p>No advertising SDKs, analytics tools (e.g., Firebase Analytics), or trackers are included.</p>
@@ -467,6 +469,7 @@
                             <p>Since we collect no data:</p>
                             <ul>
                                 <li><strong>Use:</strong> All "data" (e.g., your canvas content) is processed ephemerally on-device for App features only, including local encryption/decryption during save/load.</li>
+                                <p><strong>Offline Subscription Access:</strong> Premium features remain active offline by trusting the cached paid period end-date. On cancel or payment failure, access continues until that date (your full paid time—no extras added). Refunds (Google's ~48-hour window) revoke immediately upon detection. We recommend connecting online occasionally (e.g., weekly) for verification—it's quick and keeps everything current.</p>
                                 <li><strong>Sharing:</strong> We do not share, sell, or disclose any information about you. User-initiated shares (e.g., exporting files) are your responsibility and not mediated by us.</li>
                             </ul>
                             <p>In the event of a device backup (e.g., via Google Drive), that's controlled by your OS/account settings—not the App.</p>
@@ -543,6 +546,8 @@
                 <div class="accordion-content">
                     <p><strong>Reminders user-set?</strong> Yes—for exact timing. Algorithm may be an option in the future.</p>
                     <p><strong>Overdue? </strong> Check Home > Overdue, or Edit Menu > Pond Editor (bubbles highlight reds/oranges).</p>
+                    <p><strong>Do I Need Internet for Premium?</strong> Internet is required to install the app and make purchases (handled securely by Google). After setup, premium features work fully offline for your paid period. The app makes occasional light checks (e.g., on launch) to stay current on changes like cancellations—connect when convenient, but it's not needed for daily use.</p>
+                    <p><strong>What if I cancel my sub?</strong> Access continues until your current billing period ends (no prorating). Refunds (within Google's ~48-hour window) revoke immediately on next check. See above for how offline access works during this time.</p>
                 </div>
             </div>
         </div>
