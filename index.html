@@ -7,8 +7,6 @@
     <meta name="description" content="Draw, hop, and review ideas on an endless canvas. Free to start, premium unlocks.">
     <!-- Swiper CSS via CDN for carousel -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- GLightbox CSS via CDN for full-view modals -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <style>
         /* Smooth scrolling for nav jumps */
         html { scroll-behavior: smooth; }
@@ -356,24 +354,24 @@
             <div class="swiper hero-swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <a data-src="assets/emotions-screenshot.png" class="glightbox" data-gallery="screenshots">
-                            <img src="assets/emotions-screenshot.png" alt="Ekman's 6 Emotions mindmap" loading="lazy">
-                        </a>
+                        <button class="modal-btn" onclick="openModal('assets/emotions-screenshot.png', 'Ekman\'s 6 Emotions mindmap')" style="border: none; background: transparent; cursor: pointer;">
+                            <img src="assets/emotions-screenshot.png" alt="Ekman's 6 Emotions mindmap" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                        </button>
                     </div>
                     <div class="swiper-slide">
-                        <a data-src="assets/grace-redemption.png" class="glightbox" data-gallery="screenshots">
-                            <img src="assets/grace-redemption.png" alt="Grace and Redemption theology map" loading="lazy">
-                        </a>
+                        <button class="modal-btn" onclick="openModal('assets/grace-redemption.png', 'Grace and Redemption theology map')" style="border: none; background: transparent; cursor: pointer;">
+                            <img src="assets/grace-redemption.png" alt="Grace and Redemption theology map" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                        </button>
                     </div>
                     <div class="swiper-slide">
-                        <a data-src="assets/character-sheet.png" class="glightbox" data-gallery="screenshots">
-                            <img src="assets/character-sheet.png" alt="D&D character and class overview" loading="lazy">
-                        </a>
+                        <button class="modal-btn" onclick="openModal('assets/character-sheet.png', 'D&D character and class overview')" style="border: none; background: transparent; cursor: pointer;">
+                            <img src="assets/character-sheet.png" alt="D&D character and class overview" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                        </button>
                     </div>
                     <div class="swiper-slide">
-                        <a data-src="assets/dnd-stats.png" class="glightbox" data-gallery="screenshots">
-                            <img src="assets/dnd-stats.png" alt="D&D character stats sheet" loading="lazy">
-                        </a>
+                        <button class="modal-btn" onclick="openModal('assets/dnd-stats.png', 'D&D character stats sheet')" style="border: none; background: transparent; cursor: pointer;">
+                            <img src="assets/dnd-stats.png" alt="D&D character stats sheet" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                        </button>
                     </div>
                 </div>
                 <div class="swiper-pagination"></div>
@@ -619,42 +617,35 @@
             }
         });
 
-        // GLightbox Init: Full-view on image click/tap (modal only, no tabs)
-        document.addEventListener('DOMContentLoaded', function() {
-            // Block default link behavior on all .glightbox elements
-            document.querySelectorAll('.glightbox').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();  // Stop any navigation
-                });
-                link.addEventListener('touchstart', function(e) {
-                    e.preventDefault();  // Mobile tap fix
-                });
-            });
+        // Custom Modal Functions
+        let modal = document.getElementById('imageModal');
+        let modalImg = document.getElementById('modalImage');
+        let captionText = document.getElementById('modalCaption');
 
-            const lightbox = GLightbox({
-                selector: '.glightbox',
-                touchNavigation: true,
-                loop: true,
-                zoomable: true,
-                draggable: true,
-                width: '90%',
-                height: '90%',
-                openEffect: 'none',  // Instant open
-                closeEffect: 'none', // Instant close
-                closable: true,      // X button always visible
-                tapToClose: true,    // Close on tap outside (mobile-friendly)
-                dragAutoSnap: false, // Smooth drag
-                download: false,     // No download
-                onOpen: function() {
-                    document.body.style.overflow = 'hidden';  // Lock scroll under modal
-                    console.log('GLightbox opened');  // Debug: Check console
-                },
-                onClose: function() {
-                    document.body.style.overflow = '';  // Restore scroll
-                    console.log('GLightbox closed');   // Debug
-                }
-            });
-            console.log('GLightbox ready');  // Confirm init
+        function openModal(src, alt) {
+            modal.style.display = 'block';
+            modalImg.src = src;
+            captionText.innerHTML = alt;
+            document.body.style.overflow = 'hidden';  // Lock scroll
+            console.log('Modal opened: ' + src);  // Debug
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';  // Unlock scroll
+            console.log('Modal closed');  // Debug
+        }
+
+        // Close on outside click or ESC
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
         });
 
         // Main Accordion Toggle
@@ -767,6 +758,13 @@ document.addEventListener('keydown', function(event) {
         <p style="font-size: 0.8em; margin-top: 1rem;">Stay tuned—your pond awaits!</p>
     </div>
 </div>
+
+    <!-- Custom Image Modal -->
+    <div id="imageModal" class="custom-modal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);">
+        <span class="close-modal" onclick="closeModal()" style="position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer;">&times;</span>
+        <img id="modalImage" style="margin: auto; display: block; width: 90%; max-width: 800px; max-height: 90%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div id="modalCaption" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: white; font-size: 18px; text-align: center;"></div>
+    </div>
     
 </body>
 </html>
