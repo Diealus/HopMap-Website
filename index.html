@@ -356,22 +356,22 @@
             <div class="swiper hero-swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <a href="assets/emotions-screenshot.png" class="glightbox" data-gallery="screenshots">
+                        <a data-src="assets/emotions-screenshot.png" class="glightbox" data-gallery="screenshots">
                             <img src="assets/emotions-screenshot.png" alt="Ekman's 6 Emotions mindmap" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a href="assets/grace-redemption.png" class="glightbox" data-gallery="screenshots">
+                        <a data-src="assets/grace-redemption.png" class="glightbox" data-gallery="screenshots">
                             <img src="assets/grace-redemption.png" alt="Grace and Redemption theology map" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a href="assets/character-sheet.png" class="glightbox" data-gallery="screenshots">
+                        <a data-src="assets/character-sheet.png" class="glightbox" data-gallery="screenshots">
                             <img src="assets/character-sheet.png" alt="D&D character and class overview" loading="lazy">
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a href="assets/dnd-stats.png" class="glightbox" data-gallery="screenshots">
+                        <a data-src="assets/dnd-stats.png" class="glightbox" data-gallery="screenshots">
                             <img src="assets/dnd-stats.png" alt="D&D character stats sheet" loading="lazy">
                         </a>
                     </div>
@@ -619,20 +619,28 @@
             }
         });
 
-        // GLightbox Init: Full-view on image click/tap
-        const lightbox = GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true,
-            zoomable: true,
-            draggable: true,
-            width: '90%',
-            height: '90%',
-            openEffect: 'none',  // Instant open—no animation delay
-            closeEffect: 'none', // Instant close
-            closable: true,      // Ensures X button always shows
-            dragAutoSnap: false, // Smoother drag on mobile/desktop
-            download: false      // No download button (keeps it clean; optional)
+        // GLightbox Init: Full-view on image click/tap (modal only, no tabs)
+        document.addEventListener('DOMContentLoaded', function() {  // Wait for DOM ready
+            const lightbox = GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                zoomable: true,
+                draggable: true,
+                width: '90%',
+                height: '90%',
+                openEffect: 'none',  // Instant open
+                closeEffect: 'none', // Instant close
+                closable: true,      // X button always visible
+                dragAutoSnap: false, // Smooth mobile drag
+                download: false,     // No download icon
+                onOpen: function() { // Custom: Block any default nav
+                    document.body.style.overflow = 'hidden';  // Prevent scroll under modal
+                },
+                onClose: function() {
+                    document.body.style.overflow = '';  // Restore scroll
+                }
+            });
         });
 
         // Main Accordion Toggle
