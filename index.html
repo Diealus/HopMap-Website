@@ -7,6 +7,8 @@
     <meta name="description" content="Draw, hop, and review ideas on an endless canvas. Free to start, premium unlocks.">
     <!-- Swiper CSS via CDN for carousel -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- GLightbox CSS via CDN for full-view modals -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <style>
         /* Smooth scrolling for nav jumps */
         html { scroll-behavior: smooth; }
@@ -353,10 +355,26 @@
         <div class="carousel-container">
             <div class="swiper hero-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="assets/emotions-screenshot.png" alt="Ekman's 6 Emotions mindmap" loading="lazy"></div>
-                    <div class="swiper-slide"><img src="assets/grace-redemption.png" alt="Grace and Redemption theology map" loading="lazy"></div>
-                    <div class="swiper-slide"><img src="assets/character-sheet.png" alt="D&D character and class overview" loading="lazy"></div>            
-                    <div class="swiper-slide"><img src="assets/dnd-stats.png" alt="D&D character stats sheet" loading="lazy"></div>
+                    <div class="swiper-slide">
+                        <a href="assets/emotions-screenshot.png" class="glightbox" data-gallery="screenshots">
+                            <img src="assets/emotions-screenshot.png" alt="Ekman's 6 Emotions mindmap" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="assets/grace-redemption.png" class="glightbox" data-gallery="screenshots">
+                            <img src="assets/grace-redemption.png" alt="Grace and Redemption theology map" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="assets/character-sheet.png" class="glightbox" data-gallery="screenshots">
+                            <img src="assets/character-sheet.png" alt="D&D character and class overview" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="assets/dnd-stats.png" class="glightbox" data-gallery="screenshots">
+                            <img src="assets/dnd-stats.png" alt="D&D character stats sheet" loading="lazy">
+                        </a>
+                    </div>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -599,6 +617,17 @@
                 mouseEnter: function () { this.autoplay.stop(); },
                 mouseLeave: function () { setTimeout(() => this.autoplay.start(), 3000); }
             }
+        });
+
+        // GLightbox Init: Full-view on image click/tap
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            zoomable: true,
+            draggable: true,
+            width: '90%',
+            height: '90%'
         });
 
         // Main Accordion Toggle
