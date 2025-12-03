@@ -184,7 +184,8 @@
             max-height: 0; overflow: hidden; background: var(--bg-canvas); 
             transition: max-height 0.3s ease; padding: 0 1rem; color: var(--text-ui); /* Symmetric padding */
         }
-        .accordion-content.active { max-height: 2000px; padding: 1rem; }
+        .accordion-content.active { max-height: none !important; padding: 1rem; }
+        
         .accordion-content p, .accordion-content ul, .accordion-content table, .accordion-content ol { margin-bottom: 1rem; }
         .accordion-content h3 { color: var(--primary); margin: 1rem 0 0.5rem; }
         table { width: 100%; border-collapse: collapse; background: var(--bg-ui); min-width: 300px; }
