@@ -905,9 +905,15 @@
     <!-- CTA -->
     <section id="cta" class="cta section-anchor">
         <div class="container">
-            <h2>HopMap – Coming Soon to Google Play!</h2>
-            <p>Unlock Pro Features Inside: Smart Reviews, Lilypads, Frogs, Ponds &amp; More. Free to start.</p>
-            <button class="play-store-btn" onclick="openComingSoonModal()">🐸 Coming Soon</button>
+            <h2>HopMap is now live on Google Play!</h2>
+            <p>Download free. Unlock Pro for the full spaced-review system (Lilypads, Frogs, Ponds &amp; more).</p>
+            <a href="https://play.google.com/store/apps/details?id=com.seanh.hopmap&hl=en_US" 
+               class="play-store-btn" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               style="text-decoration: none; display: inline-flex; align-items: center; gap: 12px;">
+                🐸 Get HopMap on Google Play
+            </a>
         </div>
     </section>
 
@@ -1057,32 +1063,7 @@
                 document.querySelector('.hamburger').classList.remove('active');
             }
         });
-
-        // Coming Soon Modal
-        function openComingSoonModal() {
-            document.getElementById('comingSoonModal').style.display = 'block';
-        }
-        function closeComingSoonModal() {
-            document.getElementById('comingSoonModal').style.display = 'none';
-        }
-        window.addEventListener('click', function(event) {
-            const modalEl = document.getElementById('comingSoonModal');
-            if (event.target === modalEl) closeComingSoonModal();
-        });
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') closeComingSoonModal();
-        });
     </script>
-
-    <!-- Coming Soon Modal -->
-    <div id="comingSoonModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeComingSoonModal()">×</span>
-            <h3>🐸 HopMap is Hopping Your Way!</h3>
-            <p>Our infinite canvas app is in final polish. We'll see you on Google Play very soon.</p>
-            <p style="font-size: 0.85rem; margin-top: 1.25rem;">Stay tuned—your pond awaits!</p>
-        </div>
-    </div>
 
     <!-- Custom Image Modal -->
     <div id="imageModal" class="custom-modal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
