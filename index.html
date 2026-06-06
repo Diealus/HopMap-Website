@@ -500,121 +500,49 @@
 
     <!-- Sections -->
     <section class="sections container">
-        <div id="features" class="section-anchor">
+
+        <!-- New: HopMap's Simple Learning Loop -->
+        <div class="section-anchor">
             <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">Features</div>
+                <div class="accordion-header" onclick="toggleAccordion(this)">HopMap's Simple Learning Loop</div>
                 <div class="accordion-content">
-                    <div class="table-wrapper">
-                        <table class="features-table">
-                            <thead>
-                                <tr>
-                                    <th>Feature</th>
-                                    <th>Free</th>
-                                    <th>Pro</th>
-                                    <th>How it solves real learning struggles</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Infinite Canvas</strong></td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>Complex topics no longer get cramped or lost. Spread your full web of ideas across endless space so you can see the big picture and fine details at the same time — exactly when your brain needs context to connect new material to what you already know.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Draw Mode</strong></td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>Drawing by hand is one of the strongest ways to encode information into long-term memory. Use thick lines for core concepts and thinner ones for supporting details so visual hierarchy is instantly clear — no extra labels needed.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Erase Mode</strong></td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>Your thinking evolves. Clean up outdated branches or mistakes in one gesture without ruining the rest of your map. Experiment freely — one undo brings anything back.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Pan &amp; Zoom</strong></td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>Move around even the largest mind maps without friction. Zoom in for detail work, zoom out for overview — you spend time thinking, not fighting the interface.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Select Mode</strong></td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>Reorganizing used to mean redrawing everything. Lasso any mix of strokes, Lilypads, Frogs, and media, then move, resize, recolor, or delete the whole group at once. Your map stays current as your understanding grows.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Media Mode</strong></td>
-                                    <td>✓</td>
-                                    <td>✓</td>
-                                    <td>Embed the exact diagram, photo, or animated GIF right where it clarifies an idea. Visual references dramatically boost recall, and everything travels together in one .HopMap file — no broken links, ever.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Lilypads</strong></td>
-                                    <td>✗</td>
-                                    <td>✓</td>
-                                    <td>In a big map, critical ideas get buried. Place named markers and jump straight to any of them instantly from the menu or a review notification. Review sessions start productive instead of wasting minutes searching.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Frogs</strong></td>
-                                    <td>✗</td>
-                                    <td>✓</td>
-                                    <td>Ideas don’t exist in isolation. Create labeled connector hubs that link related Lilypads across your whole canvas. See relationships clearly and strengthen the connections that turn isolated facts into real understanding.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Ponds</strong></td>
-                                    <td>✗</td>
-                                    <td>✓</td>
-                                    <td>Related material scattered across the canvas is impossible to review efficiently. Group it into focused visual regions, dim everything else for concentration, and receive smart reminders at intervals you control — turning “I should review this” into quick, high-retention sessions that actually happen.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <ol style="padding-left: 1.25rem; margin-bottom: 1.5rem; line-height: 1.7;">
+                        <li><strong>Draw &amp; connect</strong> — Build your mind map and mark key ideas with Lilypads and Frogs.</li>
+                        <li><strong>Encapsulate in a new Pond</strong> — Group the material you want to master into its own focused Pond.</li>
+                        <li><strong>Set your next review</strong> — Accept or adjust the app’s suggestion (based on your last actual gap).</li>
+                        <li><strong>Review when notified</strong> — Use Pond View and cycling tools to do focused, high-quality retrieval practice.</li>
+                        <li><strong>Manually set the following review</strong> — After reviewing, choose your next interval. Each short session compounds retention while keeping total time low.</li>
+                        <li><strong>Add new material</strong> — Start the loop again with fresh content. Previous Ponds continue strengthening in the background.</li>
+                    </ol>
 
-                    <p style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.6;">
-                        HopMap isn’t just another drawing app. It’s a complete system built around how real learning actually works: you draw to encode, you mark and connect ideas to organize, you review at the right moments to retain, and you hop between concepts to discover new patterns.
+                    <p style="font-style: italic; opacity: 0.9; margin-top: 1rem;">
+                        This loop is built around spaced repetition and active recall — the techniques with the strongest evidence for durable learning.
                     </p>
-
-                    <p style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.6;">
-                        Every tool is designed so the hard work of remembering happens naturally — with far less total time than traditional re-reading and cramming.
-                    </p>
-
-                    <div style="margin-top: 2rem;">
-                        <strong>Pro unlocks the full spaced-review system most learners need but never had:</strong>
-                        <ul style="padding-left: 1.5rem; margin-top: 0.75rem;">
-                            <li>Instant navigation to any key idea during review</li>
-                            <li>Clear visual connections between related concepts</li>
-                            <li>Personalized reminders that respect your actual schedule</li>
-                            <li>Full undo safety net so you can iterate without fear</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div id="how-it-works" class="section-anchor">
             <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">How It Works</div>
+                <div class="accordion-header" onclick="toggleAccordion(this)">HopMap In Depth</div>
                 <div class="accordion-content">
                     <p>HopMap supports many different study styles. Some people connect ideas with Frogs and Lilypads as they draw. Others let the map get messy during a study session, then clean up and add connections on later reviews. Some make heavy use of folders or Pond ordering so they can cycle through Lilypads/Frogs in sequence as a unique kind of active-recall test. Others focus almost entirely on one Pond for deep, distraction-free review. All of these approaches are valid — and the app supports them all.</p>
                     
-                    <p><strong>Core loop most users follow:</strong> Draw freely while studying → Mark key ideas with Lilypads and connect related concepts with named Frogs → Draw or spray a Pond around the session’s content → Right after studying: quick active recall (hide the Pond or use Pond View) → Tap to set a smart review reminder (often ~1 hour later or your preferred morning/afternoon/evening window) → When the notification arrives, warp straight to the Pond, review in focused mode, cycle if you want, and strengthen weak spots → Mark reviewed → smart suggestion for the next interval appears (grows intelligently based on your actual history). Rinse and repeat.</p>
+                    <p><strong>Core loop most users follow:</strong> Draw and write freely while studying → Mark key ideas with Lilypads and connect related concepts with named Frogs → Draw or spray a Pond around the session’s content → Right after studying: quick active recall (hide the Pond or use Pond View) → Tap to set a smart review reminder (often ~1 hour later or your preferred morning/afternoon/evening window) → When the notification arrives, warp straight to the Pond, review with Pond View enabled, cycle through Lilypads or Frogs if you want, and strengthen weak spots → Mark reviewed → smart suggestion for the next interval appears (grows based on your last gap), or set the gap that better suits your recall. Rinse and repeat.</p>
 
                     <!-- Sub-section 1: Flexible Workflows -->
                     <div class="sub-accordion-item">
                         <div class="sub-accordion-header" onclick="toggleSubAccordion(this)">
-                            📋 Flexible Workflows for Every Learning Style
+                            📋 Flexible Workflows for Every Individual
                         </div>
                         <div class="sub-accordion-content">
                             <h3>Multiple proven patterns — pick what fits you</h3>
                             <ul>
-                                <li><strong>Build-as-you-go:</strong> Draw, place Lilypads, create labeled Frogs immediately, draw Pond, schedule first review.</li>
+                                <li><strong>Build-as-you-go:</strong> Draw, place Lilypads, create Frogs and make Lilypad connections immediately, encapsulate within a Pond, schedule first review.</li>
                                 <li><strong>Clean-up then connect:</strong> Produce a “messy” map during focused study, review it a few times to consolidate, then add Frogs/Lilypads for connections once the structure is clearer.</li>
                                 <li><strong>Cycle-powered review:</strong> Organize Lilypads or Frogs into folders (or use Pond ordering) and use the forward/back arrows in the menu to cycle through them in sequence — perfect for “predict what this connects to” active recall.</li>
-                                <li><strong>Pond-focused deep work:</strong> Keep most work inside one or two Ponds. Use Pond View to dim everything else, warp from notifications or the Pond menu, and stay in flow.</li>
-                                <li><strong>Folder-organized navigation:</strong> Drag Lilypads between folders, reorder inside folders, and cycle within a folder only when you want structured sequential review.</li>
+                                <li><strong>Pond-focused deep work:</strong> Create a separate Pond for each study session. Use Pond View to dim everything else, warp from notifications or the Pond menu, and stay in flow.</li>
+                                <li><strong>Folder-organized navigation:</strong> Drag Lilypads and Frogs between folders, reorder inside folders, and cycle within a folder only when you want structured sequential review.</li>
                             </ul>
                             <p>The in-app Help menus contain detailed “Pro Tips for Mind Mapping &amp; Learning” for each mode — highly recommended reading once you start using the app.</p>
                         </div>
@@ -722,6 +650,100 @@
                     <p style="margin-top: 2rem; font-style: italic; opacity: 0.9;">
                         The beauty of HopMap is that it doesn’t force one rigid workflow. It gives you a rich set of tools and lets you use them in the way that matches how your brain actually works. Start simple, explore the different review styles, and you’ll quickly discover the combination that makes knowledge stick with the least total effort.
                     </p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="features" class="section-anchor">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Features</div>
+                <div class="accordion-content">
+                    <div class="table-wrapper">
+                        <table class="features-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Free</th>
+                                    <th>Pro</th>
+                                    <th>How it solves real learning struggles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Infinite Canvas</strong></td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>Complex topics no longer get cramped or lost. Spread your full web of ideas across endless space so you can see the big picture and fine details at the same time — exactly when your brain needs context to connect new material to what you already know.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Draw Mode</strong></td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>Drawing by hand is one of the strongest ways to encode information into long-term memory. Use thick lines for core concepts and thinner ones for supporting details so visual hierarchy is instantly clear — no extra labels needed.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Erase Mode</strong></td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>Your thinking evolves. Clean up outdated branches or mistakes in one gesture without ruining the rest of your map. Experiment freely — one undo brings anything back.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pan &amp; Zoom</strong></td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>Move around even the largest mind maps without friction. Zoom in for detail work, zoom out for overview — you spend time thinking, not fighting the interface.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Select Mode</strong></td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>Reorganizing used to mean redrawing everything. Lasso any mix of strokes, Lilypads, Frogs, and media, then move, resize, recolor, or delete the whole group at once. Your map stays current as your understanding grows.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Media Mode</strong></td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>Embed the exact diagram, photo, or animated GIF right where it clarifies an idea. Visual references dramatically boost recall, and everything travels together in one .HopMap file — no broken links, ever.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Lilypads</strong></td>
+                                    <td>✗</td>
+                                    <td>✓</td>
+                                    <td>In a big map, critical ideas get buried. Place named markers and jump straight to any of them instantly from the menu or a review notification. Review sessions start productive instead of wasting minutes searching.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Frogs</strong></td>
+                                    <td>✗</td>
+                                    <td>✓</td>
+                                    <td>Ideas don’t exist in isolation. Create labeled connector hubs that link related Lilypads across your whole canvas. See relationships clearly and strengthen the connections that turn isolated facts into real understanding.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ponds</strong></td>
+                                    <td>✗</td>
+                                    <td>✓</td>
+                                    <td>Related material scattered across the canvas is impossible to review efficiently. Group it into focused visual regions, dim everything else for concentration, and receive smart reminders at intervals you control — turning “I should review this” into quick, high-retention sessions that actually happen.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.6;">
+                        HopMap isn’t just another drawing app. It’s a complete system built around how real learning actually works: you draw to encode, you mark and connect ideas to organize, you review at the right moments to retain, and you hop between concepts to discover new patterns.
+                    </p>
+
+                    <p style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.6;">
+                        Every tool is designed so the hard work of remembering happens naturally — with far less total time than traditional re-reading and cramming.
+                    </p>
+
+                    <div style="margin-top: 2rem;">
+                        <strong>Pro unlocks the full spaced-review system most learners need but never had:</strong>
+                        <ul style="padding-left: 1.5rem; margin-top: 0.75rem;">
+                            <li>Instant navigation to any key idea during review</li>
+                            <li>Clear visual connections between related concepts</li>
+                            <li>Personalized reminders that respect your actual schedule</li>
+                            <li>Full undo safety net so you can iterate without fear</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
