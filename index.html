@@ -421,21 +421,8 @@
             border-radius: 9999px; font-size: 0.8rem; font-weight: 600;
         }
     </style>
-    <script id="splash-screen-script">
-        function removeSplashFromWeb() {
-          document.getElementById("splash")?.remove();
-          document.getElementById("splash-branding")?.remove();
-          document.body.style.background = "transparent";
-        }
-    </script>
 </head>
 <body>
-  <!-- Splash screen – uses your app launcher icon so it matches the app -->
-  <picture id="splash">
-      <source srcset="assets/hopmaplauncher.png 1x, assets/hopmaplauncher.png 2x" media="(prefers-color-scheme: dark)">
-      <source srcset="assets/hopmaplauncher.png 1x, assets/hopmaplauncher.png 2x" media="(prefers-color-scheme: light)">
-  </picture>
-
     <!-- Persistent Top Nav -->
     <nav class="top-nav" id="topNav">
         <div class="nav-logo">
@@ -508,11 +495,11 @@
                 <div class="accordion-content">
                     <ol style="padding-left: 1.25rem; margin-bottom: 1.5rem; line-height: 1.7;">
                         <li><strong>Draw &amp; connect</strong> — Build your mind map and mark key ideas with Lilypads and Frogs.</li>
-                        <li><strong>Encapsulate in a new Pond</strong> — Group the material you want to master into its own focused Pond.</li>
-                        <li><strong>Set your next review</strong> — Accept or adjust the app’s suggestion (based on your last actual gap).</li>
-                        <li><strong>Review when notified</strong> — Use Pond View and cycling tools to do focused, high-quality retrieval practice.</li>
-                        <li><strong>Manually set the following review</strong> — After reviewing, choose your next interval. Each short session compounds retention while keeping total time low.</li>
-                        <li><strong>Add new material</strong> — Start the loop again with fresh content. Previous Ponds continue strengthening in the background.</li>
+                        <li><strong>Encapsulate one study session in a Pond</strong> — Group the material you want to master. If nothing is focused, the first region is named General so you can start immediately — rename it anytime, or create a named Pond with + in the Pond Menu, star it, and draw into that one instead.</li>
+                        <li><strong>Set your next review</strong> — Accept or adjust the Smart suggestion (it grows from your last scheduled interval), or pick the time yourself in the file or on the Review Calendar.</li>
+                        <li><strong>Review when notified</strong> — Warp into that Pond. Use Pond View and cycling for focused retrieval. Mark the review complete <em>in the file</em> — the calendar only sets when it fires next.</li>
+                        <li><strong>Set the following review</strong> — After you complete a review in the file, choose the next interval. Each short session compounds retention while keeping total time low.</li>
+                        <li><strong>Add new material</strong> — Start the loop again with fresh content. Previous Ponds keep their own schedules in the background.</li>
                     </ol>
 
                     <p style="font-style: italic; opacity: 0.9; margin-top: 1rem;">
@@ -528,7 +515,7 @@
                 <div class="accordion-content">
                     <p>HopMap supports many different study styles. Some people connect ideas with Frogs and Lilypads as they draw. Others let the map get messy during a study session, then clean up and add connections on later reviews. Some make heavy use of folders or Pond ordering so they can cycle through Lilypads/Frogs in sequence as a unique kind of active-recall test. Others focus almost entirely on one Pond for deep, distraction-free review. All of these approaches are valid — and the app supports them all.</p>
                     
-                    <p><strong>Core loop most users follow:</strong> Draw and write freely while studying → Mark key ideas with Lilypads and connect related concepts with named Frogs → Draw or spray a Pond around the session’s content → Right after studying: quick active recall (hide the Pond or use Pond View) → Tap to set a smart review reminder (often ~1 hour later or your preferred morning/afternoon/evening window) → When the notification arrives, warp straight to the Pond, review with Pond View enabled, cycle through Lilypads or Frogs if you want, and strengthen weak spots → Mark reviewed → smart suggestion for the next interval appears (grows based on your last gap), or set the gap that better suits your recall. Rinse and repeat.</p>
+                    <p><strong>Core loop most users follow:</strong> Draw and write freely while studying → Mark key ideas with Lilypads and connect related concepts with named Frogs → Encapsulate that session in a Pond (draw/spray, or create a named Pond with + and star it before adding area) → Right after studying: quick active recall (Pond View, or Move Pond to hide/reveal) → Set the next review in the Pond Editor or on the Home Review Calendar (Smart grows from your last scheduled interval, or pick any time) → When the notification arrives, warp to the Pond, review with Pond View, cycle Lilypads or Frogs if you want → Complete the review <em>inside the file</em> → set the next interval. Rinse and repeat.</p>
 
                     <!-- Sub-section 1: Flexible Workflows -->
                     <div class="sub-accordion-item">
@@ -538,7 +525,7 @@
                         <div class="sub-accordion-content">
                             <h3>Multiple proven patterns — pick what fits you</h3>
                             <ul>
-                                <li><strong>Build-as-you-go:</strong> Draw, place Lilypads, create Frogs and make Lilypad connections immediately, encapsulate within a Pond, schedule first review.</li>
+                                <li><strong>Build-as-you-go:</strong> Draw, place Lilypads, create Frogs and make Lilypad connections immediately, encapsulate the session in a Pond (General is only a first-region shortcut — rename it or create a named Pond with +), schedule first review.</li>
                                 <li><strong>Clean-up then connect:</strong> Produce a “messy” map during focused study, review it a few times to consolidate, then add Frogs/Lilypads for connections once the structure is clearer.</li>
                                 <li><strong>Cycle-powered review:</strong> Organize Lilypads or Frogs into folders (or use Pond ordering) and use the forward/back arrows in the menu to cycle through them in sequence — perfect for “predict what this connects to” active recall.</li>
                                 <li><strong>Pond-focused deep work:</strong> Create a separate Pond for each study session. Use Pond View to dim everything else, warp from notifications or the Pond menu, and stay in flow.</li>
@@ -555,11 +542,11 @@
                         </div>
                         <div class="sub-accordion-content">
                             <h3>How “Set next review” actually works</h3>
-                            <p>When you tap the clock icon in the Pond Editor (or “Set next review”), you see a <strong>hypothetical smart suggestion</strong> calculated from your previous review gaps, preferred time window (Morning / Afternoon / Evening / Any), and a sensible growth factor (~1.7× on longer intervals, faster growth on very short same-day intervals).</p>
+                            <p>In the Pond Editor (Reviews) or on the Home <strong>Review Calendar</strong>, you can pick a day and time yourself or tap <strong>Use Smart time</strong>. Smart grows from that Pond’s <strong>last scheduled interval</strong> (not a late actual gap), respects your preferred window (Morning / Afternoon / Evening / Any), and honors Longest Smart gap so waits do not grow forever.</p>
                             
-                            <p>You can accept the suggestion as-is or easily tweak the hours and minutes. Then you confirm. That’s it.</p>
+                            <p>You can accept the suggestion as-is or change the day and clock. Then you confirm. That’s it.</p>
                             
-                            <p><strong>No automatic scheduling after you mark a review complete.</strong> This is intentional:</p>
+                            <p><strong>Completing a review happens only in the file</strong> — never on the calendar. The calendar owns the next fire and the phone reminder. The HopMap file owns history and Smart. After you mark complete in the file, nothing is auto-scheduled. That is intentional:</p>
                             <ul>
                                 <li>You might want the next interval shorter or longer than the suggestion.</li>
                                 <li>You might have forgotten to review for a few hours or days and want to adjust.</li>
@@ -567,9 +554,9 @@
                                 <li>You stay in complete control — the app never forces a schedule on you.</li>
                             </ul>
                             
-                            <p>The smart logic is transparent and per-Pond: it remembers your preferred window and max auto-gap settings, shows you the previous interval and what the new gap will be, and lets you override anything. You can also manually set any future date/time.</p>
+                            <p>The smart logic is transparent and per-Pond: it remembers your preferred window and max auto-gap, shows last reviewed / last gap / count, and lets you override anything. Reset reviews (with confirm) if you have forgotten it all and want a clean first review — the Pond stays.</p>
                             
-                            <p>Notifications respect your exact chosen time (down to the minute) and take you straight into the correct .HopMap file and the right Pond.</p>
+                            <p>Notifications fire at the exact time you chose and open the correct .HopMap at that Pond. Encrypted files warn that the Pond name can appear on the lock screen.</p>
                         </div>
                     </div>
 
@@ -584,7 +571,7 @@
                             
                             <p><strong>Frogs</strong> are labeled connection hubs. You can link multiple Lilypads to a Frog and see the relationship clearly (e.g. “requires”, “improves”, “causes”). Tap a Frog to warp to it. Frogs and Lilypads both show which Pond(s) they belong to in their displayed name.</p>
                             
-                            <p><strong>Folders</strong> let you organize Lilypads (and Frogs have similar organization). Drag to reorder, drag Lilypads between folders, and use the cycling arrows in the Lilypad/Frog menu to go forward or backward through the current folder or across all folders (depending on your “Cycle within folder” setting).</p>
+                            <p><strong>Folders</strong> keep a big map from becoming a junk drawer. Tap + in the Frog or Lilypad Menu to create a folder. A marker can live in only one folder at a time, but it is always listed under All. Checklist + long-press (or the handle) files items into a folder. Cycle arrows can stay inside a folder or walk everything, depending on your settings.</p>
                             
                             <p>This gives you multiple powerful review modalities: sequential cycling for structured retrieval practice, random access via search or direct tap, and notification-driven focused review inside a Pond.</p>
                         </div>
@@ -597,10 +584,11 @@
                         </div>
                         <div class="sub-accordion-content">
                             <h3>Group, focus, and review without distraction</h3>
-                            <p>Draw or spray a Pond around any group of strokes, Lilypads, Frogs, and Media. Everything inside belongs to that Pond. You can move the Pond, reorder content inside it, set a precise “notification entry point” (anchor), and enable phone notifications with smart timing.</p>
-                            
-<p><strong>Pond View</strong> dims everything outside the selected Pond (including drawings, Lilypads, Frogs, and Media) so you can concentrate on exactly the material you’re reviewing right now.</p>                            
-                            <p>Notifications + Pond View + instant warp = the fastest path from “I should review this” to actually doing high-quality, focused recall.</p>
+                            <p>A Pond is a region — like a study session you return to. Encapsulate one session in a Pond. Draw or spray area onto the canvas; if nothing is focused, HopMap names that first region <strong>General</strong> so you can start immediately. Rename it whenever you like. After the first, most Ponds start from <strong>+</strong> in the Pond Menu: name it, star it (focus), then Draw or Spray to give it a region.</p>
+                            <p>Frogs and Lilypads inside the bounds are listed on that Pond — you can warp to those, not only to the Pond’s anchor. Erase Pond removes region, not the Pond; star it again and draw to add area back.</p>
+                            <p><strong>Move Pond:</strong> with Pond View on, drag a Pond over content to reveal it, off content to hide it. Double-tap and hold, then drag, to relocate that region and anything that lives only in it.</p>
+                            <p><strong>Pond View</strong> (status-bar water-drop, or View → Pond View) dims everything outside the selected Pond so you can concentrate on exactly the material you’re reviewing right now.</p>
+                            <p>Notifications + Pond View + instant warp = the fastest path from “I should review this” to high-quality, focused recall.</p>
                         </div>
                     </div>
 
@@ -638,12 +626,11 @@
                             🚀 Getting Started &amp; Try Before You Commit
                         </div>
                         <div class="sub-accordion-content">
-                            <h3>Test Canvas – experiment with zero risk</h3>
-                            <p>Open the in-app Help menu → tap any mode’s “Open Full Test Canvas” button. You can try drawing, erasing, Lilypads, Frogs, Media, Ponds, cycling, reordering — everything works live and isolated. Notifications and some Pro-only menu actions are intentionally disabled in the test canvas (they require a saved file and would take you out of the test environment anyway).</p>
-                            
-                            <p>Once you’re ready, create a real .HopMap file, build your first Pond, and try the full smart review flow. The in-app Help menus for every mode contain extensive “Pro Tips for Mind Mapping &amp; Learning” written specifically to help you get the most out of the system.</p>
-                            
-                            <p>Pro is a one-time unlock (or subscription) that gives you the complete navigation + review toolkit. Free users still get a very capable infinite canvas with drawing, media, selection, and undo/redo.</p>
+                            <h3>Test Canvas, tutorials, and your first file</h3>
+                            <p>Help → any mode’s “Open Full Test Canvas” lets you try drawing, arrows, brushes, erasing, Lilypads, Frogs, Media, Ponds, cycling, and selection — live and isolated. Review scheduling and Pro tutorials need a <strong>real saved HopMap</strong>, not Test Canvas.</p>
+                            <p>On a real file, Help → Tutorials walks the infinite canvas, Ponds, Reviews, and Frogs &amp; Lilypads <em>on that file</em> (Next / Back / End anytime; anything you create stays). The Review Calendar guide starts from Home → Help. Mode Help pages still have “Pro Tips for Mind Mapping &amp; Learning.”</p>
+                            <p>Set a HopMaps folder on Home if you want new files to save there. Review schedule backup (a .hmcal file you choose) is for moving reminders to another phone — it is not cloud sync.</p>
+                            <p>HopMap Pro is a <strong>subscription</strong> (monthly, quarterly, or yearly — yearly is Best value) that unlocks Lilypads, Frogs, Ponds, reviews, and the Review Calendar. Free users get the infinite canvas: draw (including brushes), arrows, erase, select, media, pan, zoom, and undo/redo.</p>
                         </div>
                     </div>
 
@@ -679,7 +666,13 @@
                                     <td><strong>Draw Mode</strong></td>
                                     <td>✓</td>
                                     <td>✓</td>
-                                    <td>Drawing by hand is one of the strongest ways to encode information into long-term memory. Use thick lines for core concepts and thinner ones for supporting details so visual hierarchy is instantly clear — no extra labels needed.</td>
+                                    <td>Drawing by hand is one of the strongest ways to encode information into long-term memory. Use thick lines for core concepts and thinner ones for supporting details. Cycle Pen, Marker, Soft, and Calligraphy when you want ink that actually behaves like those tools.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Arrow Mode</strong></td>
+                                    <td>✓</td>
+                                    <td>✓</td>
+                                    <td>Freehand connectors with their own thickness — Draw size and taper stay put. Optional taper and double heads make relationships readable without turning every line into a label.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Erase Mode</strong></td>
@@ -697,7 +690,7 @@
                                     <td><strong>Select Mode</strong></td>
                                     <td>✓</td>
                                     <td>✓</td>
-                                    <td>Reorganizing used to mean redrawing everything. Lasso any mix of strokes, Lilypads, Frogs, and media, then move, resize, recolor, or delete the whole group at once. Your map stays current as your understanding grows.</td>
+                                    <td>Reorganizing used to mean redrawing everything. Lasso any mix of strokes, Lilypads, Frogs, and media, then move, resize, recolor, or delete the whole group. Turn on Add to selection to gather clusters from around the map (Pan and Zoom stay on Add until you Deselect, Cut, or Paste). Far-apart groups paste together by default; Paste as laid out keeps the original spacing. Long-press for Paste last or Clipboard history.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Media Mode</strong></td>
@@ -721,7 +714,13 @@
                                     <td><strong>Ponds</strong></td>
                                     <td>✗</td>
                                     <td>✓</td>
-                                    <td>Related material scattered across the canvas is impossible to review efficiently. Group it into focused visual regions, dim everything else for concentration, and receive smart reminders at intervals you control — turning “I should review this” into quick, high-retention sessions that actually happen.</td>
+                                    <td>Related material scattered across the canvas is impossible to review efficiently. Encapsulate one study session in a Pond, dim everything else with Pond View, and receive smart reminders at intervals you control — turning “I should review this” into quick, high-retention sessions that actually happen.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Review Calendar</strong></td>
+                                    <td>✗</td>
+                                    <td>✓</td>
+                                    <td>See and set Pond times from Home without opening the map. Colored dots on the month, Files &amp; Ponds for unset items, Smart or a clock you pick. Completing a review still happens inside the file — the calendar only owns the next fire and the reminder.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -740,8 +739,8 @@
                         <ul style="padding-left: 1.5rem; margin-top: 0.75rem;">
                             <li>Instant navigation to any key idea during review</li>
                             <li>Clear visual connections between related concepts</li>
-                            <li>Personalized reminders that respect your actual schedule</li>
-                            <li>Full undo safety net so you can iterate without fear</li>
+                            <li>Ponds, phone reminders, Smart time, and history you control</li>
+                            <li>Review Calendar on Home — set times without opening the map</li>
                         </ul>
                     </div>
                 </div>
@@ -753,7 +752,7 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">Privacy Policy</div>
                 <div class="accordion-content">
                     <h3>HopMap Privacy Policy</h3>
-                    <p><strong>Effective Date:</strong> April 10, 2026</p>
+                    <p><strong>Effective Date:</strong> August 16, 2026</p>
                     <p>HopMap ("the App," "we," "us," or "our") is a mindmapping and infinite canvas application developed by HopMap LLC. We are committed to protecting your privacy and ensuring that your personal information is handled responsibly. This Privacy Policy explains how we handle any data in connection with the App, including what information is collected, how it is used, and your rights.</p>
                     <p>By downloading, installing, or using the App, you agree to the terms of this Privacy Policy. If you do not agree, please do not use the App.</p>
                     
@@ -768,7 +767,9 @@
                                 <li><strong>No Personal Data Collected:</strong> We do not collect, access, or store any personally identifiable information (PII), such as your name, email address, device ID, location, or usage analytics.</li>
                                 <li><strong>No App Activity Data:</strong> We do not track your interactions within the App, such as features used, session duration, or content created.</li>
                                 <li><strong>No Device or Performance Data:</strong> No crash reports, diagnostics, or telemetry are sent off-device.</li>
-                                <li><strong>Local Files Only:</strong> HopMap files you create are saved to your device's local storage. Any sharing (e.g., via copy/paste, export, or OS share sheet to services like Google Drive) is initiated and controlled by you, and we do not facilitate or monitor these actions.</li>
+                                <li><strong>Local Files Only:</strong> HopMap files you create are saved to your device's local storage (including a folder you pick through the system file picker). Any sharing (e.g., via copy/paste, export, or OS share sheet to services like Google Drive) is initiated and controlled by you, and we do not facilitate or monitor these actions.</li>
+                                <li><strong>Review times:</strong> Next-review times and reminder state live in an on-device store used by the in-app Review Calendar. Nothing is written to your OS calendar. A review-schedule backup (.hmcal) is a file you choose to save or import — not cloud sync.</li>
+                                <li><strong>Notification text:</strong> Phone reminders are local. If a Pond is encrypted, the App warns that the Pond name can appear on the lock screen.</li>
                                 <li><strong>Media Content (Images &amp; GIFs):</strong> Using Media mode, you can add images and animated GIFs directly to your canvas. These media files are stored entirely locally as part of your .HopMap files. The app never uploads, scans, moderates, or transmits any media content off your device.</li>
                                 <li><strong>Encryption Feature:</strong> Encrypted saving uses a user-provided password to secure file contents on-device via AES-CBC encryption with PBKDF2 key derivation. The password is used only during save/load and is not stored, transmitted, or accessible to us. We do not guarantee recoverability (lost passwords mean irrecoverable files) or security against advanced attacks—this is a convenience feature, not a professional encryption tool.</li>
                             </ul>
@@ -787,8 +788,8 @@
                                 <table class="permissions-table">
                                     <thead><tr><th>Permission</th><th>Purpose</th><th>Scope</th></tr></thead>
                                     <tbody>
-                                        <tr><td>READ_EXTERNAL_STORAGE / WRITE_EXTERNAL_STORAGE</td><td>Read/write HopMap files to your device's storage.</td><td>Local file access only; no cloud sync.</td></tr>
-                                        <tr><td>SCHEDULE_EXACT_ALARM</td><td>Schedule local reminders/notifications (e.g., for canvas tasks).</td><td>On-device alarms; no server involvement.</td></tr>
+                                        <tr><td>Storage access via the system picker (SAF)</td><td>Open, save, and export .HopMap files and images you choose. Optional persistable access to a HopMaps folder you pick.</td><td>Only files and folders you select; no broad storage scan; no cloud sync.</td></tr>
+                                        <tr><td>SCHEDULE_EXACT_ALARM</td><td>Schedule local Pond review reminders at the time you set (in-file or on the Review Calendar).</td><td>On-device alarms; no OS calendar; no server involvement.</td></tr>
                                         <tr><td>POST_NOTIFICATIONS</td><td>Display local push notifications.</td><td>Device screen only.</td></tr>
                                         <tr><td>RECEIVE_BOOT_COMPLETED</td><td>Restart local alarms after device reboot.</td><td>On-device persistence.</td></tr>
                                         <tr><td>INTERNET</td><td>Required for Google Play In-app Billing to check subscription status and process purchases. All billing communication is directly and exclusively with Google Play servers.</td><td>No other network activity occurs.</td></tr>
@@ -914,11 +915,14 @@
             <div class="accordion-item">
                 <div class="accordion-header" onclick="toggleAccordion(this)">FAQ</div>
                 <div class="accordion-content">
-                    <p><strong>Are reminders user-set?</strong> Yes — you choose the exact time. The app shows a smart hypothetical suggestion based on your history and preferences, but you always confirm and can adjust freely.</p>
-                    <p><strong>What if I forget to review for a few days?</strong> No problem. When you finally open the Pond Editor you can set whatever next review time makes sense for you — shorter, longer, or even “never”. You’re always in control.</p>
+                    <p><strong>Are reminders user-set?</strong> Yes — you choose the exact time in the Pond Editor or on the Review Calendar. Smart suggests a later date from your last scheduled interval and preferences; you always confirm or change it.</p>
+                    <p><strong>What if I forget to review for a few days?</strong> No problem. When you finally open the Pond Editor you can set whatever next review time makes sense — shorter, longer, or unset. Reset reviews if you want a clean first review; the Pond stays.</p>
+                    <p><strong>Does the Review Calendar mark reviews complete?</strong> No. The calendar sets (or clears) the next fire and the phone reminder. Completing a review happens only inside the HopMap file. Recents never delete your reviews.</p>
+                    <p><strong>Can I add to a selection after I Pan or Zoom away?</strong> Yes. Turn on Add to selection, then navigate — it stays on until you Deselect, Cut, or actually Paste (a long-press alone does not turn it off). Far-apart groups paste together by default; choose Paste as laid out if you want the original spacing.</p>
+                    <p><strong>Do encrypted files hide Pond names on notifications?</strong> The file contents stay encrypted on disk. If phone reminders are on, the Pond name can appear on the lock screen — the app warns you.</p>
                     <p><strong>Do I Need Internet for Pro?</strong> Internet is required to install the app and make purchases (handled securely by Google). After setup, premium features work fully offline for your paid period. The app makes occasional light checks (e.g., on launch) to stay current on changes like cancellations—connect when convenient, but it's not needed for daily use.</p>
                     <p><strong>What if I cancel my subscription?</strong> Access continues until your current billing period ends (no prorating). Refunds (within Google's ~48-hour window) revoke immediately on next check. See the Privacy Policy for how offline access works during this time.</p>
-                    <p><strong>Can I try the full system before buying Pro?</strong> Yes — the Test Canvas in the Help menu lets you try drawing, Lilypads, Frogs, Ponds, cycling, media, selection, etc. Notifications and some menu actions are disabled in the test canvas for technical and anti-cheat reasons, but you can still experience the core workflow.</p>
+                    <p><strong>Can I try the full system before buying Pro?</strong> Test Canvas in Help lets you try drawing, arrows, brushes, Lilypads, Frogs, Ponds, cycling, media, and selection in isolation. Review scheduling and Pro tutorials need a real saved HopMap. On a file, Help → Tutorials walks those features without leaving your map.</p>
                 </div>
             </div>
         </div>
@@ -928,7 +932,7 @@
     <section id="cta" class="cta section-anchor">
         <div class="container">
             <h2>HopMap is now live on Google Play!</h2>
-            <p>Download free. Unlock Pro for the full spaced-review system (Lilypads, Frogs, Ponds &amp; more).</p>
+            <p>Download free. Subscribe to Pro for Lilypads, Frogs, Ponds, reviews, and the Review Calendar.</p>
             <a href="https://play.google.com/store/apps/details?id=com.seanh.hopmap&hl=en_US" 
                class="play-store-btn" 
                target="_blank" 
